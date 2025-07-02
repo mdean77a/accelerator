@@ -15,7 +15,8 @@ export default function HomePage() {
   // const [error, setError] = useState<string | null>(null);
   // const [apiHealthy, setApiHealthy] = useState<boolean | null>(null);
   const router = useRouter();
-
+  const apiHealthy = true;
+  const loading = false;
   // Load protocols from API or fallback to localStorage
   // useEffect(() => {
   //   const loadProtocols = async () => {
@@ -156,7 +157,7 @@ export default function HomePage() {
           </p>
           
           {/* API Status Indicator */}
-          {/* {!loading && apiHealthy === true && (
+          {!loading && apiHealthy === true && (
             <div style={{ 
               marginTop: '12px', 
               padding: '8px 16px', 
@@ -168,8 +169,8 @@ export default function HomePage() {
               border: '1px solid #bbf7d0'
             }}>
               🟢 Connected to API
-            </div> */}
-          {/* )} */}
+            </div>
+           )}
         </div>
 
       {/* {loading ? ( */}
