@@ -1,5 +1,5 @@
 {
-  "$schema": "https://openapi.vercel.sh/schema.json",
+  "version": 2,
   "functions": {
     "api/src/main.py": {
       "runtime": "@vercel/python"
