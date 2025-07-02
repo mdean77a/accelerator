@@ -1,103 +1,214 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+// import ProtocolSelector from '@/components/ProtocolSelector';
+// import ProtocolUpload from '@/components/ProtocolUpload';
+// import type { Protocol, HealthResponse, ProtocolsListResponse } from '@/types/protocol';
+// import { getProtocolId } from '@/types/protocol';
+// import { protocolsApi, healthApi, logApiConfig } from '@/utils/api';
+
+export default function HomePage() {
+  // const [protocols, setProtocols] = useState<Protocol[]>([]);
+  // const [showUpload, setShowUpload] = useState(false);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);
+  // const [apiHealthy, setApiHealthy] = useState<boolean | null>(null);
+  const router = useRouter();
+
+  // Load protocols from API or fallback to localStorage
+  // useEffect(() => {
+  //   const loadProtocols = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
+        
+  //       // Log API configuration for debugging
+  //       logApiConfig();
+        
+  //       // Check API health first
+  //       try {
+  //         const healthResponse = await healthApi.check() as HealthResponse;
+  //         console.log('Health check response:', healthResponse);
+          
+  //         // Check if backend is actually available
+  //         if (healthResponse.status !== 'healthy') {
+  //           throw new Error(`Backend unavailable: ${healthResponse.status}`);
+  //         }
+          
+  //         setApiHealthy(true);
+  //         console.log('✅ API is healthy - using backend');
+          
+  //         // Load protocols from API
+  //         const apiResponse = await protocolsApi.list() as Protocol[] | ProtocolsListResponse;
+  //         const apiProtocols = Array.isArray(apiResponse) ? apiResponse : (apiResponse as ProtocolsListResponse).protocols || [];
+  //         setProtocols(Array.isArray(apiProtocols) ? apiProtocols : []);
+  //       } catch (apiError) {
+  //         console.warn('⚠️ API unavailable:', apiError);
+  //         setApiHealthy(false);
+  //         setError('Backend API is not running. Please start the backend server to use this application.');
+  //         setProtocols([]);
+  //       }
+  //     } catch (error) {
+  //       console.error('Error loading protocols:', error);
+  //       setError('Failed to load protocols');
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   loadProtocols();
+  // }, []);
+
+
+
+
+  // const handleProtocolSelect = (protocol: Protocol) => {
+  //   try {
+  //     console.log('🔄 Protocol selected:', protocol);
+      
+  //     // Store selected protocol for session persistence
+  //     localStorage.setItem('selectedProtocol', JSON.stringify(protocol));
+      
+  //     // Navigate to document type selection page with query params
+  //     const protocolId = getProtocolId(protocol);
+  //     console.log('📋 Using protocol ID:', protocolId);
+      
+  //     const params = new URLSearchParams({
+  //       protocolId: protocolId,
+  //       studyAcronym: protocol.study_acronym
+  //     });
+      
+  //     console.log('🚀 Navigating to:', `/document-selection?${params.toString()}`);
+  //     router.push(`/document-selection?${params.toString()}`);
+  //   } catch (error) {
+  //     console.error('❌ Error in handleProtocolSelect:', error);
+  //   }
+  // };
+
+  // const handleUploadNew = () => {
+  //   setShowUpload(true);
+  // };
+
+  // const handleUploadComplete = async (fileName: string, acronym: string, uploadedProtocol?: unknown) => {
+  //   try {
+  //     if (apiHealthy && uploadedProtocol) {
+  //       // Use the protocol that was already created by the upload endpoint
+  //       console.log('✅ Using protocol created by upload:', uploadedProtocol);
+        
+  //       const newProtocol = uploadedProtocol as Protocol;
+        
+  //       // Update local state
+  //       const updatedProtocols = [newProtocol, ...(Array.isArray(protocols) ? protocols : [])];
+  //       setProtocols(updatedProtocols);
+        
+  //       // Store the new protocol as selected
+  //       localStorage.setItem('selectedProtocol', JSON.stringify(newProtocol));
+        
+  //       // Navigate to document type selection page
+  //       const params = new URLSearchParams();
+  //       const protocolId = newProtocol.protocol_id || newProtocol.id;
+  //       if (protocolId) {
+  //         params.set('protocolId', protocolId);
+  //         params.set('studyAcronym', newProtocol.study_acronym);
+  //       } else {
+  //         throw new Error('Protocol ID is missing');
+  //       }
+  //       router.push(`/document-selection?${params.toString()}`);
+  //     } else {
+  //       // API is not available
+  //       console.error('❌ Cannot upload protocol - API is not available');
+  //       alert('Cannot upload protocol. Backend API is not running.');
+  //     }
+  //   } catch (error) {
+  //     console.error('❌ Error handling upload completion:', error);
+  //     alert('Failed to complete protocol setup. Please try again.');
+  //   }
+  // };
+
+  // const handleUploadCancel = () => {
+  //   setShowUpload(false);
+  // };
+
+
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div style={{ 
+      padding: '24px', 
+      maxWidth: '1024px', 
+      margin: '0 auto',
+      minHeight: '100vh'
+    }}>
+      <main role="main">
+        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <h1 style={{
+            fontSize: '2.5rem',
+            fontWeight: 'bold',
+            background: 'linear-gradient(to right, #2563eb, #9333ea)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            marginBottom: '16px'
+          }}>
+            Clinical Trial Accelerator
+          </h1>
+          <p style={{ color: '#6b7280', fontSize: '1.125rem' }}>
+            Streamline your clinical trial documentation with AI-powered document generation. Generate informed consent forms and site initiation checklists.
+          </p>
+          
+          {/* API Status Indicator */}
+          {/* {!loading && apiHealthy === true && (
+            <div style={{ 
+              marginTop: '12px', 
+              padding: '8px 16px', 
+              borderRadius: '20px', 
+              display: 'inline-block',
+              fontSize: '0.875rem',
+              backgroundColor: '#dcfce7',
+              color: '#166534',
+              border: '1px solid #bbf7d0'
+            }}>
+              🟢 Connected to API
+            </div> */}
+          {/* )} */}
         </div>
+
+      {/* {loading ? ( */}
+        {/* <div style={{ textAlign: 'center', padding: '48px' }}> */}
+          {/* <div style={{ fontSize: '1.125rem', color: '#6b7280' }}> */}
+            {/* Loading protocols... Debug: loading=true */}
+          {/* </div> */}
+        {/* </div> */}
+      {/* ) : error ? ( */}
+        {/* <div style={{  */}
+          {/* textAlign: 'center',  */}
+          {/* padding: '48px',
+          backgroundColor: '#fef2f2',
+          border: '1px solid #fecaca',
+          borderRadius: '8px',
+          color: '#dc2626' */}
+        {/* }}> */}
+          {/* <div style={{ fontSize: '1.125rem', marginBottom: '8px' }}>
+            ⚠️ Error Loading Protocols
+          </div> */}
+          {/* <div style={{ fontSize: '0.875rem' }}>
+            {error}
+          </div> */}
+        {/* </div> */}
+      {/* ) : showUpload ? (
+        <ProtocolUpload 
+          onUploadComplete={handleUploadComplete}
+          onCancel={handleUploadCancel}
+        /> */}
+      {/* ) : (
+        <>
+          <ProtocolSelector 
+            protocols={protocols}
+            onProtocolSelect={handleProtocolSelect}
+            onUploadNew={handleUploadNew}
+          /> */}
+        {/* </>
+      )} */}
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
