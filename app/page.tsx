@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import Button from '@/app/src/components/Button';
 import Card from '@/app/src/components/Card';
 import Input from '@/app/src/components/Input';
@@ -184,6 +185,32 @@ export default function HomePage() {
               🟢 Connected to API
             </div>
            )}
+        </div>
+
+        {/* Navigation Section */}
+        <div style={{ 
+          marginTop: '32px', 
+          padding: '24px', 
+          border: '1px solid #e5e7eb', 
+          borderRadius: '8px',
+          backgroundColor: '#f9fafb',
+          textAlign: 'center'
+        }}>
+          <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '16px' }}>
+            Navigation
+          </h2>
+          <div style={{ display: 'flex', gap: '16px', justifyContent: 'center' }}>
+            <Link href="/page1">
+              <Button className="bg-blue-500 hover:bg-blue-600 text-white">
+                Go to Page 1
+              </Button>
+            </Link>
+            <Link href="/page2">
+              <Button className="bg-purple-500 hover:bg-purple-600 text-white">
+                Go to Page 2
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* Button Preview Section */}
