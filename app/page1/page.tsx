@@ -16,14 +16,16 @@ export default function Page1() {
       study_acronym: 'COVID-VAX-2024',
       protocol_title: 'A Phase 3 Study of Novel COVID-19 Vaccine in Adults',
       upload_date: '2024-01-15T10:30:00Z',
-      file_path: '/protocols/covid-vax-2024.pdf'
+      file_path: '/protocols/covid-vax-2024.pdf',
+      status: 'active'
     },
     {
       protocol_id: '2', 
       study_acronym: 'ONCO-TRIAL-23',
       protocol_title: 'Randomized Trial of Combination Therapy in Advanced Oncology',
       upload_date: '2024-01-10T14:20:00Z',
-      file_path: '/protocols/onco-trial-23.pdf'
+      file_path: '/protocols/onco-trial-23.pdf',
+      status: 'active'
     }
   ];
 
